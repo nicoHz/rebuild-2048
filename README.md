@@ -1,4 +1,9 @@
 
+### rebuild-2048
+
+This is just a try to recreate the game 2048.
+
+
 ### process-images.sh
 
 Even if they are tiny, bash scripts a great in optimizing personal workflow. 
