@@ -1,14 +1,3 @@
-
-function makeField(numberOfRows) {
-	var field = [];
-	var row;
-	for(var i =0; i<numberOfRows; i++){
-		row = makeRow(numberOfRows);
-		field.push(row);
-	}
-	return field;
-}
-
 function makeRow(numberOfFields) {
 	var number = null;
 	var row = [];
@@ -18,28 +7,41 @@ function makeRow(numberOfFields) {
 	return row;
 }  
 
-
-function randomField() {
-// this must contain calculation of x and y 
+function makeField(playfieldSize) {
+	var field = [];
+	var row;
+	for(var i =0; i<playfieldSize; i++){
+		row = makeRow(playfieldSize);
+		field.push(row);
+	}
+	return field;
 }
 
-var x = Math.floor(Math.random() * 4); // redundanz!? same calculation for y, but its necessary, maybe.
-var y = Math.floor(Math.random() * 4);
-
-
-var playfield = makeField(4); 
-var value2 = 2;
-
-
-playfield[x][y] = value2; // How to check playfield, if value is null? or how can i call randomField() for calculation?
-playfield[2][2] = 4;
-playfield[0][0] = "first";
-playfield[3][3] = "last";
+var playfieldSize = 4;
+var playfield = makeField(playfieldSize);
 console.log(playfield);
 
+function getRandomCoordinates(playfieldSize) {
+	return [
+		Math.floor(Math.random()* playfieldSize),
+		Math.floor(Math.random()* playfieldSize)
+			];
+}
 
-// set a speciefied value in one randomly choosen field if it's current value is null
-// 1. choose a field randomly and
-// 2. check, if it's holding a null; 
-// 3. if the field holds value null, set specified value; if not, back to step 1.
+function placeNumberAtRandomFreePosition(nextnumber) {
+	var x, y;
+	// TODO This is an endless loop when the entire playfield is occupied by numbers
+	do {
+		var coordinates = getRandomCoordinates(playfieldSize);
+		x = coordinates[0];
+		y = coordinates[1];
+		console.log(x, y);
+	} while(playfield[x][y] !== null);
+	// console.log('old playfield', playfield);
+	playfield[x][y] = nextnumber;
+	console.log('new playfield', playfield);
+}
+
+placeNumberAtRandomFreePosition(2);
+																																				
 
